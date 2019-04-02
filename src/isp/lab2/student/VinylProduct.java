@@ -1,5 +1,6 @@
-package isp.lab1.student;
+package isp.lab2.student;
 
+import isp.lab1.student.*;
 import java.time.Duration;
 
 public interface VinylProduct {

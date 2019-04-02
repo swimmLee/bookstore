@@ -1,11 +1,10 @@
 package isp.lab1.student;
 
 import isp.lab1.*;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class HardcoverBook implements Product, BookProduct {
+public class HardcoverBook implements Product {
 
     private String title;
     private String isbn;
@@ -15,9 +14,7 @@ public class HardcoverBook implements Product, BookProduct {
     private String author;
     private int pageCount;
 
-    public HardcoverBook(String title, String isbn, double cost,
-            int quantityOnHand, LocalDate releaseDate,
-            String author, int pageCount) {
+    public HardcoverBook(String title, String isbn, double cost, int quantityOnHand, LocalDate releaseDate, String author, int pageCount) {
         this.title = title;
         this.isbn = isbn;
         this.cost = cost;

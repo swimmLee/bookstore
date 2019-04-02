@@ -1,27 +1,32 @@
-package isp.lab1.student;
+package isp.lab2.student;
 
+import isp.lab1.student.*;
 import isp.lab1.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class PaperbackBook implements Product {
+public class VinylRecord implements Product, VinylProduct {
+
+    private final int SECONDS_IN_MINUTE = 60;
+    private final int SECONDS_IN_HOUR = SECONDS_IN_MINUTE * 60;
 
     private String title;
-    private String isbn;
     private double cost;
     private int quantityOnHand;
     private LocalDate releaseDate;
-    private String author;
-    private int pageCount;
+    private String artist;
+    private Duration playingTime;
 
-    public PaperbackBook(String title, String isbn, double cost, int quantityOnHand, LocalDate releaseDate, String author, int pageCount) {
+    public VinylRecord(String title, double cost,
+            int quantityOnHand, LocalDate releaseDate,
+            String artist, Duration playingTime) {
         this.title = title;
-        this.isbn = isbn;
         this.cost = cost;
         this.quantityOnHand = quantityOnHand;
         this.releaseDate = releaseDate;
-        this.author = author;
-        this.pageCount = pageCount;
+        this.artist = artist;
+        this.playingTime = playingTime;
     }
 
     @Override
@@ -30,8 +35,8 @@ public class PaperbackBook implements Product {
     }
 
     @Override
-    public String getISBN() {
-        return isbn;
+    public String getFormattedReleaseDate() {
+        return releaseDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     @Override
@@ -50,8 +55,8 @@ public class PaperbackBook implements Product {
     }
 
     @Override
-    public String getAuthor() {
-        return author;
+    public String getArtist() {
+        return artist;
     }
 
     @Override
@@ -63,26 +68,28 @@ public class PaperbackBook implements Product {
     }
 
     @Override
-    public int getPages() {
-        return pageCount;
+    public Duration getPlayingTime() {
+        return playingTime;
     }
 
     @Override
-    public String getFormattedReleaseDate() {
-        return releaseDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    public String getFormattedPlayingTime() {
+        long seconds = playingTime.getSeconds();
+        return String.format(
+                "%d:%02d",
+                seconds / SECONDS_IN_HOUR,
+                (seconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Paperback Book: ");
+        StringBuilder sb = new StringBuilder("Vinyl Record: ");
         sb.append("\n Title: ").append(title);
-        sb.append("\n Author: ").append(author);
+        sb.append("\n Artist: ").append(artist);
         sb.append("\n Cost: $").append(cost);
-        sb.append("\n ISBN: ").append(isbn);
-        sb.append("\n Pages: ").append(pageCount);
+        sb.append("\n Playing time: ").append(getFormattedPlayingTime());
         sb.append("\n Release date: ").append(getFormattedReleaseDate());
         sb.append("\n Quantity on hand: ").append(quantityOnHand);
         return sb.toString();
     }
-
 }

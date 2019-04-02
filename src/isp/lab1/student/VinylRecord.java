@@ -5,7 +5,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class VinylRecord implements Product, VinylProduct {
+public class VinylRecord implements AlbumProduct {
 
     private final int SECONDS_IN_MINUTE = 60;
     private final int SECONDS_IN_HOUR = SECONDS_IN_MINUTE * 60;
@@ -17,9 +17,7 @@ public class VinylRecord implements Product, VinylProduct {
     private String artist;
     private Duration playingTime;
 
-    public VinylRecord(String title, double cost,
-            int quantityOnHand, LocalDate releaseDate,
-            String artist, Duration playingTime) {
+    public VinylRecord(String title, double cost, int quantityOnHand, LocalDate releaseDate, String artist, Duration playingTime) {
         this.title = title;
         this.cost = cost;
         this.quantityOnHand = quantityOnHand;
@@ -71,8 +69,7 @@ public class VinylRecord implements Product, VinylProduct {
         return playingTime;
     }
 
-    @Override
-    public String getFormattedPlayingTime() {
+    private String getFormattedPlayingTime() {
         long seconds = playingTime.getSeconds();
         return String.format(
                 "%d:%02d",
